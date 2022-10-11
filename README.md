@@ -311,6 +311,7 @@ Check for the health of the server.
 ## Development
 
     $ export ELASTICSEARCH_URL=https://daisy.us-west-1.es.amazonaws.com
+    $ export DOCKER_TAG=registry.xxx.com/kk/image-match:1.0.1
     $ make build
     $ make run
     $ make push

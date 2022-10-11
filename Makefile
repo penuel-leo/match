@@ -10,10 +10,10 @@ export ELASTICSEARCH_DOC_TYPE ?= images
 all: run
 
 build:
-	docker build -t registry.ap-southeast-1.aliyuncs.com/kikitrade/image-match:1.0.0 .
+	docker build -t $(DOCKER_TAG) .
 
 push: build
-	docker push registry.ap-southeast-1.aliyuncs.com/kikitrade/image-match:1.0.0
+	docker push $(DOCKER_TAG)
 
 run: build
 	docker run \
@@ -22,7 +22,7 @@ run: build
 		-e ELASTICSEARCH_INDEX \
 		-e ELASTICSEARCH_DOC_TYPE \
 		-p $(PORT):$(PORT) \
-		-it registry.ap-southeast-1.aliyuncs.com/kikitrade/image-match:1.0.0
+		-it $(DOCKER_TAG)
 
 dev: build
 	docker-compose up
