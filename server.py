@@ -11,16 +11,16 @@ import sys
 
 es_url = os.environ.get('ELASTICSEARCH_URL')
 es_index = os.environ.get('ELASTICSEARCH_INDEX', 'images')
-es_doc_type = os.environ.get('ELASTICSEARCH_DOC_TYPE')
-all_orientations = os.environ.get('ALL_ORIENTATIONS')
 es_password = os.environ.get('ELASTICSEARCH_PASSWORD')
 es_username = os.environ.get('ELASTICSEARCH_USERNAME')
 distance_cutoff = os.environ.get('DISTANCE_CUTOFF', '0.9')
+es_doc_type = os.environ.get('ELASTICSEARCH_DOC_TYPE')
+all_orientations = os.environ.get('ALL_ORIENTATIONS')
 
 app = Flask(__name__)
 print('CONFIG:\n es_url:', es_url, '\n', 'es_index:', es_index, '\n', 'es_username:', es_username, '\n', 'es_password:', es_password, '\n', 'distance_cutoff:', distance_cutoff)
 es = Elasticsearch([es_url], http_auth=(es_username, es_password), verify_certs=False)
-ses = SignatureES(es, index=es_index, doc_type=es_doc_type, distance_cutoff=distance_cutoff)
+ses = SignatureES(es, index=es_index, doc_type=es_doc_type, distance_cutoff=float(distance_cutoff))
 gis = ImageSignature()
 
 # Try to create the index and ignore IndexAlreadyExistsException
