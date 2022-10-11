@@ -1,0 +1,5 @@
+elasticsearch~=7.10.1
+flask~=2.2.2
+numpy~=1.21.6
+image_match~=1.1.2
+certifi~=2022.6.15
