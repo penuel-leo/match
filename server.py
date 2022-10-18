@@ -37,11 +37,12 @@ def ids_with_path(path):
     return [m['_id'] for m in matches['hits']['hits']]
 
 def paths_at_location(offset, limit):
+    source = es_doc_type+'.path'
     search = es.search(index=es_index,
                        from_=offset,
                        size=limit,
-                       _source='path')
-    return [h['_source']['path'] for h in search['hits']['hits']]
+                       _source=source)
+    return [h['_source'][es_doc_type]['path'] for h in search['hits']['hits']]
 
 def count_images():
     return es.count(index=es_index)['count']
