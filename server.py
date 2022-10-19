@@ -31,9 +31,10 @@ es.indices.create(index=es_index, ignore=400)
 # Helpers
 
 def ids_with_path(path):
+    source = es_doc_type+'.path:'
     matches = es.search(index=es_index,
                         _source='_id',
-                        q='path:' + json.dumps(path))
+                        q=source + json.dumps(path))
     return [m['_id'] for m in matches['hits']['hits']]
 
 def paths_at_location(offset, limit):
